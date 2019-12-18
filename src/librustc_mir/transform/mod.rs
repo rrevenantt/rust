@@ -36,6 +36,7 @@ pub mod const_prop;
 pub mod generator;
 pub mod inline;
 pub mod uninhabited_enum_branching;
+pub mod split_local_fields;
 
 pub(crate) fn provide(providers: &mut Providers<'_>) {
     self::check_unsafety::provide(providers);
@@ -302,6 +303,7 @@ fn run_optimization_passes<'tcx>(
         &const_prop::ConstProp,
         &simplify_branches::SimplifyBranches::new("after-const-prop"),
         &deaggregator::Deaggregator,
+        &split_local_fields::SplitLocalFields,
         &copy_prop::CopyPropagation,
         &simplify_branches::SimplifyBranches::new("after-copy-prop"),
         &remove_noop_landing_pads::RemoveNoopLandingPads,
