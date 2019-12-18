@@ -185,7 +185,7 @@ impl<'a, 'tcx> LateLintPass<'a, 'tcx> for NonShorthandFieldPatterns {
                         err.span_suggestion_short(
                             subspan,
                             "remove this",
-                            ident.to_string(),
+                            "".to_owned(),
                             Applicability::MachineApplicable
                         );
                         err.emit();
